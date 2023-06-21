@@ -8,6 +8,8 @@ if($_POST)
 	$Apellidousu=$_POST['txtapellido'];
 	$Usuariousu=$_POST['txtusuario'];
 	$Passwordusu=$_POST['txtcontrasena'];
+	$Perfil=$_POST['txtperfil'];
+	$Estadousu=$_POST['txtestado'];
 
 	$administrador->addadmi($Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil,$Estadousu);
 

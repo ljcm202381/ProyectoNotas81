@@ -2,52 +2,74 @@
 include_once('../../Conexion.php');
 class Administrador extends Conexion 
 {
- 
+
+   protected $Nombreusu;
+   protected $Apellidousu;
+   protected $Usuariousu;
+   protected $Passwordusu;
+   protected $Perfil;
+   protected $Estadousu;
+
  public function __construct(){
 
- 	$this->db = parent::__construct();
+ 	$this->db=parent::__construct();
  }
 
 //funcion para registrar los usuarios
-
 public function addadmi($Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil,$Estadousu)
 {
+   //verificar de que no exista un usuario en la bd 
+   $sql1 = "SELECT * FROM usuarios WHERE Usuario = '$Usuariousu'";
+    $Resultado=$this->db->query($sql1);
+   if ($Resultado->rowCount() > 0) {
+           
+        
+      echo "<script>
+          alert('La identificacion del paciente ya esta registrada');
+          window.location = '../view/FPacientes.php';
+      </script>";   
+    }else
+    {
    //crear la sentencia sql
-	$statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Passwordusu,Perfil,Estado)values(:Nombreusu,:Apellidousu,:Usuariousu,:Passwordusu,:Perfil,:Estadousu)");
+   $statement = $this->db->prepare("INSERT INTO usuarios(Nombreusu,Apellidousu,Usuario,Password,Perfil,Estado)values(:Nombreusu,:Apellidousu,:Usuariousu,:Passwordusu,:Perfil,:Estadousu)");
 
-	$statement->bindParam(':Nombreusu',$Nombreusu);
-	$statement->bindParam(':Apellidousu',$Apellidousu);
-	$statement->bindParam(':Usuariousu',$Usuariousu);
-	$statement->bindParam(':Passwordusu',$Passwordusu);
-	$statement->bindParam(':Perfil',$Perfil);
-	$statement->bindParam(':Estadousu',$Estadousu);
-	if($statement->execute())
-	{
+   $statement->bindParam(':Nombreusu',$Nombreusu);
+   $statement->bindParam(':Apellidousu',$Apellidousu);
+   $statement->bindParam(':Usuariousu',$Usuariousu);
+   $statement->bindParam(':Passwordusu',$Passwordusu);
+   $statement->bindParam(':Perfil',$Perfil);
+   $statement->bindParam(':Estadousu',$Estadousu);
+   if($statement->execute())
+   {
      
      echo "Usuario registrado";
      header('Location: ../pages/index.php');
 
-	}else
-	{
-		echo "Usuario no registrado";
-		header('Location: ../pages/agregar.php');
+   }else
+   {
+      echo "Usuario no registrado";
+      header('Location: ../pages/agregar.php');
 
-	}
+   }
 
 }
+}
+
 
 
 //funcion para consultar todos los usuarios administradores
 
 public function getadmin()
 {
- $row=null;
- $statement=$this->db->prepare("SELECT * FROM usuarios WHERE Perfil='Administrador'");
- $statement->execute();
- while($result->$statement->fetch()){
- 	$row[]=$result;
- }
-// result $row;
+ //$row=null;
+ $sql = "SELECT * FROM usuarios WHERE Perfil='Administrador'";
+        $result = $this->db->query($sql); 
+        if ($result->rowCount() > 0) {
+            while($row = $result->fetch()) {
+                $resultset[] = $row;
+            }
+        }
+        return $resultset;
 
 }
 

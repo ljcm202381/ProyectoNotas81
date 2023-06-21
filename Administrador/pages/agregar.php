@@ -33,7 +33,7 @@
     <div class="form-group">
       <p>Perfil: 
               <label for="perfil"></label>
-              <select name="txtperfil" id="perfil">
+              <select name="txtperfil">
                   <option></option>
                 <option>Administrador</option>
                 <option>Docentes</option>
@@ -43,7 +43,7 @@
     <div class="form-group">
       <p>Estado: 
               <label for="perfil"></label>
-              <select name="txtperfil" id="perfil">
+              <select name="txtestado">
                   <option></option>
                 <option>Activo</option>
                 <option>No activo</option>

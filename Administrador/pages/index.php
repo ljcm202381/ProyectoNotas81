@@ -1,10 +1,5 @@
 
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="utf-8">
@@ -15,45 +10,94 @@ and open the template in the editor.
     </head>
     <body>
       
+        <!-- Grey with black text -->
+<nav nav class="navbar navbar-expand-sm bg-dark navbar-dark"">
+   <a class="navbar-brand" href="#">
+    <img src="../../img/colegio.png" alt="Logo" style="width:40px;">
+  </a>
+   <ul class="navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="">Usuarios</a>
+    </li>
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="">Docentes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="">Estudiantes</a>
+    </li>
+     <li class="nav-item">
+        <a class="nav-link" href="">Materias</a>
+    </li>
+     <li class="nav-item">
+       <a href="cerrar_sesion.php"><button class="btn btn-danger col col align-self-end"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Cerrar Sesion</button></a>
+            
+    </li>
+  
+        
+  
+     </ul>
+</nav>
  
         <br>
       
         <div class="container">
  <h1 style="color:blue;text-align:center;">LISTADO DE USUARIOS</h1>
           
-  <table class="table table-dark">
-    <thead>
+  <div class="content" style="text-align:center;">
+   <div class="justify-content-center">
+    <div class="col-auto mt-5">
+  <table class="table table-dark table-hover">
       <tr>
-        <th>CODIGO</th>
-        <th>USUARIO</th>
-        <th>EMAIL</th>
-        <th>ROL</th>
-        
+       
+       <th width="20%">id usuario</th>  
+       <th width="20%">Nombre</th>  
+       <th width="20%">Apellido</th>  
+       <th width="20%">Usuario</th>
+       <th width="20%">Perfil</th>
+       <th width="20%">Estado</th>      
+       <th width="10%">Editar</th>  
+       <th width="10%">Eliminar</th>  
+      
       </tr>
-    </thead>
-    <tbody>
-      <?php
+            <tbody>
 
-      $Conexion = mysqli_connect("localhost","root","","gestionsena2022") or 
-                  die("Problemas con la conexion");
-      $Resultado = mysqli_query($Conexion,"SELECT * FROM usuario")or die("Problemas al consultar la tabla".mysqli_error($Conexion));
 
-          while($registro=mysqli_fetch_array($Resultado)){
-      ?>
-        <tr>
+  <?php
+ require_once('../../Conexion.php');
+require_once('../modelos/administrador.php');
+  $obj = new Administrador();
+  //$datos = $obj->buscarconsultorio($bus);
+  $datos = $obj->getadmin();
 
-          <th><?php 
-                      $codigo = $registro['Codusuario'];
-                      echo $codigo; ?></th>
-          <th><?php echo $registro['usuario'];?></th>
-          <th><?php echo $registro['Email'];?></th>
-          <th><?php echo $registro['Rol'];?></th>
-          
-        </tr>      
-    <?php } ?>
-    </tbody>
-  </table>
-</div>
+
+  foreach ($datos as $key){
+      
+                ?>
+                
+                    <tr>
+                        <td><?php echo $key["id_usuario"] ?></td>
+                        <td><?php echo $key["Nombreusu"] ?></td>
+                        <td><?php echo $key["Apellidousu"] ?></td>
+                        <td><?php echo $key["Usuario"] ?></td>
+                        <td><?php echo $key["Perfil"] ?></td>
+                        <td><?php echo $key["Estado"] ?></td>
+                       <td> <a href="FeditarDatospacientes.php?id=?" class="btn btn-success">Actualizar</a>
+
+                       </td>
+                        
+                        <td>
+                         <td> <a href="FeditarDatospacientes.php?id=?" class="btn btn-success">Eliminar</a>
+
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    
+        </div>
+        </div>
+        </div>
 
        
     </body>
