@@ -25,8 +25,8 @@ public function addadmi($Nombreusu,$Apellidousu,$Usuariousu,$Passwordusu,$Perfil
            
         
       echo "<script>
-          alert('La identificacion del paciente ya esta registrada');
-          window.location = '../view/FPacientes.php';
+          alert('El usuario ya esta registrado');
+          window.location = '../view/FPacientes.php../pages/agregar.php';
       </script>";   
     }else
     {
@@ -76,13 +76,17 @@ public function getadmin()
 //funcion para consultar el usuario de acuerdo a su id
 public function getidad($Id)
 {
-  $row=null;
-  $statement=$this->db->prepare("SELECT * FROM usuarios WHERE id_usaurio=:Id AND Perfil='Administrador'");
-  $statement->bindParam(':Id',$Id);
-  $statement->execute();
-  while($result->$statement->fetch()){
-  	$row[]=$result;
-  }
+  
+   $statement = $this->db->prepare("SELECT * FROM usuarios WHERE id_usuario = :Id");
+            $statement->bindParam(':Id', $Id);
+            $statement->execute();
+            
+            // Obtener los resultados utilizando fetch()
+            $resultado = $statement->fetch(PDO::FETCH_ASSOC);
+            
+            // Devolver los resultados
+            return $resultado;
+        
 
 
 }

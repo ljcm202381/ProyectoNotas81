@@ -13,7 +13,7 @@
 
 <div class="container">
   <h2>REGISTRO DE USUARIOS </h2>
-  <form action="../controladores/agregarusuarios.php" method="post">
+  <form action="../controladores/agregarusuario.php" method="POST">
     <div class="form-group">
       <label >Nombre:</label>
       <input type="text" class="form-control" placeholder="Ingresar su nombre" name="txtnombre">
@@ -30,29 +30,29 @@
       <label >CONTRASEÑA:</label>
       <input type="password" class="form-control"  placeholder="Ingresar contraseña" name="txtcontrasena">
     </div>
-    <div class="form-group">
-      <p>Perfil: 
+     <div class="form-group">
+      <p>Perfil:</p>
               <label for="perfil"></label>
-              <select name="txtperfil">
-                  <option></option>
-                <option>Administrador</option>
-                <option>Docentes</option>
-              </select>
-            </p>
-    </div>
-    <div class="form-group">
-      <p>Estado: 
-              <label for="perfil"></label>
-              <select name="txtestado">
-                  <option></option>
-                <option>Activo</option>
-                <option>No activo</option>
-              </select>
-            </p>
-    </div>
-
+              <select class="form-select" name="txtperfil">
+  <option selected>Elegir opcion</option>
+  <option value="Administrador">Administrador</option>
+  <option value="Docente">Docente</option>
  
-    <button type="submit" class="btn btn-primary">REGISTRAR</button>
+</select>
+            
+    </div>
+    <div class="form-group">
+      <p>Estado:</p>
+              <label for="perfil"></label>
+              <select class="form-select" name="txtestado" >
+  <option selected>Elegir opcion</option>
+  <option value="Activo">Activo</option>
+  <option value="No activo">No activo</option>
+  
+</select>
+            
+ 
+    <button type="submit" class="btn btn-primary d-block mx-auto">REGISTRAR</button>
   </form>
 </div>
 
